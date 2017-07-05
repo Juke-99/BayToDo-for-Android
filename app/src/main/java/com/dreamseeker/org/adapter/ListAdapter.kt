@@ -22,8 +22,6 @@ class ListAdapter(context: Context, resource: Int, lists: List<Lists>): ArrayAda
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view : View
 
-        //System.out.println(convertView)
-
         if(convertView != null) {
             view = convertView
         } else {
@@ -31,13 +29,13 @@ class ListAdapter(context: Context, resource: Int, lists: List<Lists>): ArrayAda
         }
 
         val item : Lists = mitem[position]
-        val title : TextView? = view.findViewById(R.id.title)
-        val date : TextView? = view.findViewById(R.id.regist_date)
-        val checkbox : CheckBox? = view.findViewById(R.id.checkBox)
+        val title : TextView = view.findViewById(R.id.task_title)
+        val date : TextView = view.findViewById(R.id.regist_date)
+        val checkbox : CheckBox = view.findViewById(R.id.checkBox)
 
-        title?.text = item.title
-        date?.text = item.date
-        checkbox?.isChecked = item.checkbox
+        title.text = item.title
+        date.text = item.date
+        checkbox.isChecked = item.checkbox
 
         return view
     }

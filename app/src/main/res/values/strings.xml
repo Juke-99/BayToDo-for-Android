@@ -5,4 +5,5 @@
     <string name="date">date</string>
     <string name="checkbox">checkbox</string>
     <string name="linkToMemo">メモへ</string>
+    <string name="ok">OK</string>
 </resources>
