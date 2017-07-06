@@ -42,7 +42,7 @@ class MemoActivity : AppCompatActivity() {
     }
 
     fun memoRead(context: Context, title: String) {
-        val POST_URL: String = "http://localhost:9999/memo_read.php"
+        val POST_URL: String = "http://localhost:9999/volley-controller/memo_read.php"
         val postQueue: RequestQueue = Volley.newRequestQueue(context)
         val stringRequest: StringRequest = object : StringRequest(Request.Method.POST, POST_URL,
                 object : Response.Listener<String> {

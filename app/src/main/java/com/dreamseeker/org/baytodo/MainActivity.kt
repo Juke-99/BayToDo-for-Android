@@ -7,10 +7,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -57,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 .setView(editText)
                 .setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, whichButton ->
                     rest.startVolley(editText.text.toString(), this)
+                    rereadVolley(this)
                 })
                 .setNegativeButton("キャンセル", DialogInterface.OnClickListener { dialogInterface, whichButton ->
                     dialogInterface.dismiss()
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rereadVolley(context: Context) {
-        val GET_URL: String = "http://localhost:9999/read.php"
+        val GET_URL: String = "http://localhost:9999/volley-controller/read.php"
         val getQueue: RequestQueue = Volley.newRequestQueue(context)
         val jsonRequest: JsonObjectRequest = JsonObjectRequest(Request.Method.GET, GET_URL,
                 Response.Listener<JSONObject> { response ->
@@ -85,6 +83,8 @@ class MainActivity : AppCompatActivity() {
 
         var i = 0
         val listItems : ArrayList<Lists> = ArrayList()
+        val adapter = ListAdapter(this, R.layout.task_layout, listItems)
+        adapter.clear()
 
         while(i < count.length()) {
             val data = count.getJSONObject(i)
@@ -93,9 +93,7 @@ class MainActivity : AppCompatActivity() {
             i++
         }
 
-        val adapter = ListAdapter(this, R.layout.task_layout, listItems)
         task_list.adapter = adapter
         adapter.notifyDataSetChanged()
-        task_list.invalidateViews()
     }
 }
